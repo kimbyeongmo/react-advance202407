@@ -29,4 +29,4 @@ const ConfigureCounter = ({ onSet }) => {
   );
 };
 
-export default ConfigureCounter;
+export default React.memo(ConfigureCounter);
