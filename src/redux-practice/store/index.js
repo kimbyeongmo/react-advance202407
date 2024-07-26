@@ -1,16 +1,16 @@
-
 import { createStore } from "redux";
 
 // 액션 타입 상수
-export const INCREMENT = 'INCREMENT';
-export const DECREMENT = 'DECREMENT';
-export const MULTIPLY = 'MULTIPLY';
+export const INCREMENT = "INCREMENT";
+export const DECREMENT = "DECREMENT";
+export const MULTIPLY = "MULTIPLY";
+export const TOGGLE = `TOGGLE`;
 
 // 관리할 초기 상태값 객체
 const initialCountState = {
-  counter: 0
+  counter: 0,
+  showCounter: true,
 };
-
 
 // reducer: 상태 변경을 위한 순수 함수 - 부수 효과(비동기코드...)가 없는 함수
 // 카운터 상태 관리를 위한 리듀서 정의
@@ -20,29 +20,36 @@ const initialCountState = {
     return - 변경 후 새로운 상태값
 */
 const counterReducer = (state = initialCountState, action) => {
-  console.log('prev state: ', state);
-  console.log('action: ', action);
+  console.log("prev state: ", state);
+  console.log("action: ", action);
 
   // 1. 상태값 변경시 반드시 새로운 상태를 반환
   // 2. 상태값 변경은 반드시 새로운 객체를 할당해야 함.
-  switch(action.type) {
+  switch (action.type) {
     case INCREMENT:
       return {
-        counter: state.counter + 1
+        ...state,
+        counter: state.counter + 1,
       };
     case DECREMENT:
       return {
-        counter: state.counter - 1
+        ...state,
+        counter: state.counter - 1,
       };
     case MULTIPLY:
       return {
-        counter: state.counter * action.payload
+        ...state,
+        counter: state.counter * action.payload,
+      };
+    case TOGGLE:
+      return {
+        ...state,
+        showCounter: !state.showCounter,
       };
     default:
       return state;
   }
 };
-
 
 // 단하나의 리덕스 스토어
 // 스토어에는 여러 리듀서를 제공할 수 있다.
