@@ -48,10 +48,24 @@ const counterSlice = createSlice({
   }
 });
 
+const initialAuthState = {
+  isLoggedIn : false
+};
+
+// 인증 관련 슬라이스 추가
+const authSlice = createSlice({
+  name: 'auth',
+  initialState: initialAuthState,
+  reducers:{}
+});
+
 // 단하나의 리덕스 스토어
 // 스토어에는 여러 리듀서를 제공할 수 있다.
 const store = configureStore({
-  reducer: counterSlice.reducer
+  reducer: {
+    counter : counterSlice.reducer,
+    auth : authSlice.reducer
+  }
 });
 
 // 슬라이스 안에 reducers에 정의한 함수들을 내보내기
